@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GETDomaci.Models.ispit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ocena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.datum_ispita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bodovi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dosije.ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ispitni_rok.naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.predmet.sifra)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ocena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datum_ispita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bodovi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dosije.ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ispitni_rok.naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.predmet.sifra)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

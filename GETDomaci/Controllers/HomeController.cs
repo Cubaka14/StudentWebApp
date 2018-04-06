@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using GETDomaci.Models;
 namespace GETDomaci.Controllers
 {
     public class HomeController : Controller
@@ -13,18 +13,12 @@ namespace GETDomaci.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Personal()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Student info page.";
 
             return View();
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

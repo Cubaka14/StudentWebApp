@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GETDomaci.Models.dosije>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.datum_upisa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.datum_rodjenja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mesto_rodjenja)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datum_upisa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datum_rodjenja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mesto_rodjenja)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.indeks }) |
+            @Html.ActionLink("Details", "Details", new { id=item.indeks }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.indeks })
+        </td>
+    </tr>
+}
+
+</table>

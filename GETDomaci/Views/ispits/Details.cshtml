@@ -1,0 +1,67 @@
+﻿@model GETDomaci.Models.ispit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ispit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ocena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ocena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datum_ispita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datum_ispita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bodovi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bodovi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dosije.ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dosije.ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ispitni_rok.naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ispitni_rok.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.predmet.sifra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.predmet.sifra)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

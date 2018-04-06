@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="mstudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dosije">
+          <Key>
+            <PropertyRef Name="indeks" />
+          </Key>
+          <Property Name="indeks" Type="int" Nullable="false" />
+          <Property Name="ime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="prezime" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="datum_upisa" Type="date" />
+          <Property Name="datum_rodjenja" Type="date" />
+          <Property Name="mesto_rodjenja" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ispit">
+          <Key>
+            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id_predmeta" />
+            <PropertyRef Name="godina_roka" />
+            <PropertyRef Name="oznaka_roka" />
+          </Key>
+          <Property Name="indeks" Type="int" Nullable="false" />
+          <Property Name="id_predmeta" Type="int" Nullable="false" />
+          <Property Name="godina_roka" Type="smallint" Nullable="false" />
+          <Property Name="oznaka_roka" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ocena" Type="smallint" Nullable="false" />
+          <Property Name="datum_ispita" Type="date" />
+          <Property Name="bodovi" Type="smallint" />
+        </EntityType>
+        <EntityType Name="ispitni_rok">
+          <Key>
+            <PropertyRef Name="godina_roka" />
+            <PropertyRef Name="oznaka_roka" />
+          </Key>
+          <Property Name="godina_roka" Type="smallint" Nullable="false" />
+          <Property Name="oznaka_roka" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="predmet">
+          <Key>
+            <PropertyRef Name="id_predmeta" />
+          </Key>
+          <Property Name="id_predmeta" Type="int" Nullable="false" />
+          <Property Name="sifra" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="bodovi" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ispit__48CFD27E">
+          <End Role="ispitni_rok" Type="Self.ispitni_rok" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ispitni_rok">
+              <PropertyRef Name="godina_roka" />
+              <PropertyRef Name="oznaka_roka" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="godina_roka" />
+              <PropertyRef Name="oznaka_roka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ispit__id_predme__4AB81AF0">
+          <End Role="predmet" Type="Self.predmet" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="predmet">
+              <PropertyRef Name="id_predmeta" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="id_predmeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ispit__indeks__49C3F6B7">
+          <End Role="dosije" Type="Self.dosije" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dosije">
+              <PropertyRef Name="indeks" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="indeks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mstudModelStoreContainer">
+          <EntitySet Name="dosije" EntityType="Self.dosije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ispit" EntityType="Self.ispit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ispitni_rok" EntityType="Self.ispitni_rok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="predmet" EntityType="Self.predmet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ispit__48CFD27E" Association="Self.FK__ispit__48CFD27E">
+            <End Role="ispitni_rok" EntitySet="ispitni_rok" />
+            <End Role="ispit" EntitySet="ispit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ispit__id_predme__4AB81AF0" Association="Self.FK__ispit__id_predme__4AB81AF0">
+            <End Role="predmet" EntitySet="predmet" />
+            <End Role="ispit" EntitySet="ispit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ispit__indeks__49C3F6B7" Association="Self.FK__ispit__indeks__49C3F6B7">
+            <End Role="dosije" EntitySet="dosije" />
+            <End Role="ispit" EntitySet="ispit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mstudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dosije">
+          <Key>
+            <PropertyRef Name="indeks" />
+          </Key>
+          <Property Name="indeks" Type="Int32" Nullable="false" />
+          <Property Name="ime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prezime" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="datum_upisa" Type="DateTime" Precision="0" />
+          <Property Name="datum_rodjenja" Type="DateTime" Precision="0" />
+          <Property Name="mesto_rodjenja" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ispits" Relationship="Self.FK__ispit__indeks__49C3F6B7" FromRole="dosije" ToRole="ispit" />
+        </EntityType>
+        <EntityType Name="ispit">
+          <Key>
+            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id_predmeta" />
+            <PropertyRef Name="godina_roka" />
+            <PropertyRef Name="oznaka_roka" />
+          </Key>
+          <Property Name="indeks" Type="Int32" Nullable="false" />
+          <Property Name="id_predmeta" Type="Int32" Nullable="false" />
+          <Property Name="godina_roka" Type="Int16" Nullable="false" />
+          <Property Name="oznaka_roka" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ocena" Type="Int16" Nullable="false" />
+          <Property Name="datum_ispita" Type="DateTime" Precision="0" />
+          <Property Name="bodovi" Type="Int16" />
+          <NavigationProperty Name="dosije" Relationship="Self.FK__ispit__indeks__49C3F6B7" FromRole="ispit" ToRole="dosije" />
+          <NavigationProperty Name="ispitni_rok" Relationship="Self.FK__ispit__48CFD27E" FromRole="ispit" ToRole="ispitni_rok" />
+          <NavigationProperty Name="predmet" Relationship="Self.FK__ispit__id_predme__4AB81AF0" FromRole="ispit" ToRole="predmet" />
+        </EntityType>
+        <EntityType Name="ispitni_rok">
+          <Key>
+            <PropertyRef Name="godina_roka" />
+            <PropertyRef Name="oznaka_roka" />
+          </Key>
+          <Property Name="godina_roka" Type="Int16" Nullable="false" />
+          <Property Name="oznaka_roka" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ispits" Relationship="Self.FK__ispit__48CFD27E" FromRole="ispitni_rok" ToRole="ispit" />
+        </EntityType>
+        <EntityType Name="predmet">
+          <Key>
+            <PropertyRef Name="id_predmeta" />
+          </Key>
+          <Property Name="id_predmeta" Type="Int32" Nullable="false" />
+          <Property Name="sifra" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="naziv" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bodovi" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ispits" Relationship="Self.FK__ispit__id_predme__4AB81AF0" FromRole="predmet" ToRole="ispit" />
+        </EntityType>
+        <Association Name="FK__ispit__indeks__49C3F6B7">
+          <End Role="dosije" Type="Self.dosije" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dosije">
+              <PropertyRef Name="indeks" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="indeks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ispit__48CFD27E">
+          <End Role="ispitni_rok" Type="Self.ispitni_rok" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ispitni_rok">
+              <PropertyRef Name="godina_roka" />
+              <PropertyRef Name="oznaka_roka" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="godina_roka" />
+              <PropertyRef Name="oznaka_roka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ispit__id_predme__4AB81AF0">
+          <End Role="predmet" Type="Self.predmet" Multiplicity="1" />
+          <End Role="ispit" Type="Self.ispit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="predmet">
+              <PropertyRef Name="id_predmeta" />
+            </Principal>
+            <Dependent Role="ispit">
+              <PropertyRef Name="id_predmeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mstudEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dosijes" EntityType="Self.dosije" />
+          <EntitySet Name="ispits" EntityType="Self.ispit" />
+          <EntitySet Name="ispitni_rok" EntityType="Self.ispitni_rok" />
+          <EntitySet Name="predmets" EntityType="Self.predmet" />
+          <AssociationSet Name="FK__ispit__indeks__49C3F6B7" Association="Self.FK__ispit__indeks__49C3F6B7">
+            <End Role="dosije" EntitySet="dosijes" />
+            <End Role="ispit" EntitySet="ispits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ispit__48CFD27E" Association="Self.FK__ispit__48CFD27E">
+            <End Role="ispitni_rok" EntitySet="ispitni_rok" />
+            <End Role="ispit" EntitySet="ispits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ispit__id_predme__4AB81AF0" Association="Self.FK__ispit__id_predme__4AB81AF0">
+            <End Role="predmet" EntitySet="predmets" />
+            <End Role="ispit" EntitySet="ispits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mstudModelStoreContainer" CdmEntityContainer="mstudEntities1">
+          <EntitySetMapping Name="dosijes">
+            <EntityTypeMapping TypeName="mstudModel.dosije">
+              <MappingFragment StoreEntitySet="dosije">
+                <ScalarProperty Name="indeks" ColumnName="indeks" />
+                <ScalarProperty Name="ime" ColumnName="ime" />
+                <ScalarProperty Name="prezime" ColumnName="prezime" />
+                <ScalarProperty Name="datum_upisa" ColumnName="datum_upisa" />
+                <ScalarProperty Name="datum_rodjenja" ColumnName="datum_rodjenja" />
+                <ScalarProperty Name="mesto_rodjenja" ColumnName="mesto_rodjenja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ispits">
+            <EntityTypeMapping TypeName="mstudModel.ispit">
+              <MappingFragment StoreEntitySet="ispit">
+                <ScalarProperty Name="indeks" ColumnName="indeks" />
+                <ScalarProperty Name="id_predmeta" ColumnName="id_predmeta" />
+                <ScalarProperty Name="godina_roka" ColumnName="godina_roka" />
+                <ScalarProperty Name="oznaka_roka" ColumnName="oznaka_roka" />
+                <ScalarProperty Name="ocena" ColumnName="ocena" />
+                <ScalarProperty Name="datum_ispita" ColumnName="datum_ispita" />
+                <ScalarProperty Name="bodovi" ColumnName="bodovi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ispitni_rok">
+            <EntityTypeMapping TypeName="mstudModel.ispitni_rok">
+              <MappingFragment StoreEntitySet="ispitni_rok">
+                <ScalarProperty Name="godina_roka" ColumnName="godina_roka" />
+                <ScalarProperty Name="oznaka_roka" ColumnName="oznaka_roka" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="predmets">
+            <EntityTypeMapping TypeName="mstudModel.predmet">
+              <MappingFragment StoreEntitySet="predmet">
+                <ScalarProperty Name="id_predmeta" ColumnName="id_predmeta" />
+                <ScalarProperty Name="sifra" ColumnName="sifra" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="bodovi" ColumnName="bodovi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

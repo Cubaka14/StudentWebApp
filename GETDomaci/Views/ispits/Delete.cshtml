@@ -1,0 +1,73 @@
+﻿@model GETDomaci.Models.ispit
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ispit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ocena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ocena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datum_ispita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datum_ispita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bodovi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bodovi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dosije.ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dosije.ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ispitni_rok.naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ispitni_rok.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.predmet.sifra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.predmet.sifra)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
